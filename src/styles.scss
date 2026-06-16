@@ -1,1 +1,152 @@
-/* You can add global styles to this file, and also import other style files */
+@import "leaflet/dist/leaflet.css";
+
+:root {
+  --ph-color-bg: #0d1110;
+  --ph-color-surface: #1b201d;
+  --ph-color-text: #f5f7f2;
+  --ph-color-muted: #bccbb4;
+  --ph-color-soft: #8e988d;
+  --ph-color-border: rgba(86, 255, 88, 0.28);
+  --ph-color-border-muted: #3d4a39;
+  --ph-color-brand: #46ff4f;
+  --ph-color-brand-strong: #33e83f;
+
+  color-scheme: dark;
+  font-family: Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-width: 320px;
+  background: #0d1110;
+  scroll-behavior: smooth;
+}
+
+body {
+  min-height: 100dvh;
+  margin: 0;
+}
+
+button,
+input,
+textarea,
+select {
+  font: inherit;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.ph-shell {
+  width: min(100% - 48px, 1280px);
+  margin-inline: auto;
+}
+
+:focus-visible {
+  outline: 3px solid var(--ph-color-brand);
+  outline-offset: 5px;
+}
+
+.ph-map-marker {
+  display: grid;
+  align-content: end;
+  justify-items: center;
+  gap: 7px;
+  background: transparent;
+  border: 0;
+  filter: drop-shadow(0 0 14px rgba(70, 255, 79, 0.58));
+}
+
+.ph-map-marker-label {
+  display: grid;
+  justify-items: center;
+  gap: 2px;
+  width: max-content;
+  max-width: 170px;
+  padding: 8px 10px;
+  color: var(--ph-color-text);
+  background: rgba(7, 16, 6, 0.94);
+  border: 1px solid rgba(70, 255, 79, 0.36);
+  border-radius: 8px;
+  box-shadow: 0 0 18px rgba(70, 255, 79, 0.24);
+  text-align: center;
+}
+
+.ph-map-marker-label strong,
+.ph-map-marker-label small,
+.ph-map-marker-badge {
+  max-width: 100%;
+  overflow-wrap: anywhere;
+}
+
+.ph-map-marker-label strong {
+  font-size: 0.72rem;
+  line-height: 1.15;
+}
+
+.ph-map-marker-label small {
+  color: var(--ph-color-muted);
+  font-size: 0.66rem;
+  font-weight: 800;
+  line-height: 1.15;
+}
+
+.ph-map-marker-badge {
+  margin-top: 3px;
+  padding: 3px 7px;
+  color: #071006;
+  background: var(--ph-color-brand);
+  border-radius: 999px;
+  font-size: 0.56rem;
+  font-weight: 900;
+  line-height: 1.1;
+  text-transform: uppercase;
+}
+
+.ph-map-marker-dot {
+  position: relative;
+  display: block;
+  width: 34px;
+  height: 34px;
+  background: var(--ph-color-brand);
+  border: 3px solid #071006;
+  border-radius: 50% 50% 50% 0;
+  transform: rotate(-45deg);
+}
+
+.ph-map-marker-dot::after {
+  position: absolute;
+  inset: 9px;
+  content: "";
+  background: #071006;
+  border-radius: 999px;
+}
+
+.ph-map-marker.is-selected {
+  z-index: 700;
+  filter: drop-shadow(0 0 26px rgba(70, 255, 79, 0.88));
+}
+
+.ph-map-marker.is-selected .ph-map-marker-dot {
+  width: 54px;
+  height: 54px;
+}
+
+.ph-map-marker.is-selected .ph-map-marker-dot::after {
+  inset: 15px;
+}
+
+@media (max-width: 860px) {
+  .ph-shell {
+    width: min(100% - 32px, 1280px);
+  }
+}

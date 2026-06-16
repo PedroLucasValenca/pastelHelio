@@ -1,0 +1,204 @@
+﻿<section class="menu-section ph-shell" id="cardapio" aria-labelledby="menu-title">
+  <div class="menu-content">
+    <div class="menu-list">
+      <header class="menu-heading">
+        <h2 id="menu-title">A seleção</h2>
+        <p>Perfeição frita, camadas crocantes e douradas. A alma da feira brasileira levada ao próximo nível.</p>
+      </header>
+
+      <div class="menu-grid">
+        @for (item of menuItems(); track item.name) {
+          <article class="menu-card">
+            <div class="menu-card-media">
+              <img ngSrc="/pastel-hero.png" width="420" height="236" [alt]="item.imageAlt" />
+            </div>
+            <div class="menu-card-body">
+              <h3>{{ item.name }}</h3>
+              <p>{{ item.description }}</p>
+              <div class="menu-card-footer">
+                <strong>{{ formatPrice(item.price) }}</strong>
+                <button type="button" [attr.aria-label]="'Adicionar pastel de ' + item.name" (click)="addItem(item)">
+                  <svg lucidePlus aria-hidden="true"></svg>
+                </button>
+              </div>
+            </div>
+          </article>
+        }
+      </div>
+    </div>
+
+    <aside class="order-summary" id="pedido" aria-labelledby="order-title">
+      <div class="order-card">
+        <div class="order-title">
+          <svg lucideShoppingBag aria-hidden="true"></svg>
+          <h2 id="order-title">Seu pedido</h2>
+        </div>
+
+        <div class="order-items">
+          @for (item of orderItems(); track item.name) {
+            <div class="order-item">
+              <div>
+                <strong>{{ item.quantity }} - {{ item.name }} </strong>
+              </div>
+              <div class="order-item-actions">
+                <span>{{ formatPrice(item.price * item.quantity) }}</span>
+                <div class="quantity-controls" [attr.aria-label]="'Quantidade de ' + item.name">
+                  <button type="button" [attr.aria-label]="'Remover uma unidade de ' + item.name" (click)="removeOneItem(item.name)">
+                    <svg lucideMinus aria-hidden="true"></svg>
+                  </button>
+                  <button type="button" [attr.aria-label]="'Remover ' + item.name + ' do pedido'" (click)="removeItem(item.name)">
+                    <svg lucideTrash2 aria-hidden="true"></svg>
+                  </button>
+                </div>
+              </div>
+            </div>
+          } @empty {
+            <p class="empty-order">Escolha seus sabores para montar o pedido.</p>
+          }
+        </div>
+
+        <dl class="order-totals">
+          <div>
+            <dt>Subtotal</dt>
+            <dd>{{ formatPrice(subtotal()) }}</dd>
+          </div>
+          <div>
+            <dt>Taxa de entrega</dt>
+            <dd class="free">A consultar</dd>
+          </div>
+          <div class="total">
+            <dt>Total</dt>
+            <dd>{{ formatPrice(subtotal()) }}</dd>
+          </div>
+        </dl>
+
+        <button class="whatsapp-button" type="button" [disabled]="!hasOrderItems()" (click)="openCustomerModal()">
+          <svg lucideFlame aria-hidden="true"></svg>
+          Pedir pelo WhatsApp
+        </button>
+        <p class="order-note">Direto para a cozinha do Hélio</p>
+      </div>
+    </aside>
+  </div>
+</section>
+
+@if (isCustomerModalOpen()) {
+  <div class="modal-backdrop" role="presentation" (click)="closeCustomerModal()">
+    <section
+      class="customer-modal"
+      role="dialog"
+      aria-modal="true"
+      aria-labelledby="customer-modal-title"
+      (click)="$event.stopPropagation()"
+      (keydown.escape)="closeCustomerModal()"
+    >
+      <div class="modal-header">
+        <div>
+          <p>Pedido por WhatsApp</p>
+          <h2 id="customer-modal-title">Dados para entrega</h2>
+        </div>
+        <button type="button" aria-label="Fechar dados para entrega" (click)="closeCustomerModal()">
+          <svg lucideX aria-hidden="true"></svg>
+        </button>
+      </div>
+
+      <form [formGroup]="customerForm" class="customer-form" (ngSubmit)="submitOrder()">
+        <section class="modal-order-summary" aria-labelledby="modal-order-summary-title">
+          <h3 id="modal-order-summary-title">Resumo do pedido</h3>
+          <div class="modal-order-items">
+            @for (item of orderItems(); track item.name) {
+              <span>{{ item.quantity }}x {{ item.name }}</span>
+            }
+          </div>
+          <strong>{{ formatPrice(subtotal()) }}</strong>
+        </section>
+
+        <label for="customer-name">Nome</label>
+        <input
+          id="customer-name"
+          type="text"
+          formControlName="name"
+          autocomplete="name"
+          [attr.aria-invalid]="isFieldInvalid('name')"
+          aria-describedby="customer-name-error"
+        />
+        @if (isFieldInvalid('name')) {
+          <p id="customer-name-error" class="field-error">Informe seu nome.</p>
+        }
+
+        <fieldset class="payment-fieldset">
+          <legend>Forma de pagamento</legend>
+          <div class="payment-options">
+            <label class="payment-option">
+              <input type="radio" formControlName="paymentMethod" value="pix" />
+              <span>Pix</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" formControlName="paymentMethod" value="cartao" />
+              <span>Cartão</span>
+            </label>
+            <label class="payment-option">
+              <input type="radio" formControlName="paymentMethod" value="dinheiro" />
+              <span>Dinheiro</span>
+            </label>
+          </div>
+          @if (isFieldInvalid('paymentMethod')) {
+            <p class="field-error">Escolha a forma de pagamento.</p>
+          }
+        </fieldset>
+
+        @if (customerForm.controls.paymentMethod.value === 'dinheiro') {
+          <label class="change-checkbox">
+            <input type="checkbox" formControlName="needsChange" />
+            <span>Precisa de troco?</span>
+          </label>
+
+          @if (shouldShowChangeFor()) {
+            <label for="customer-change-for">Troco para quanto</label>
+            <input
+              id="customer-change-for"
+              type="text"
+              formControlName="changeFor"
+              inputmode="decimal"
+              autocomplete="off"
+              [attr.aria-invalid]="isFieldInvalid('changeFor')"
+            />
+          }
+        }
+
+        <label for="customer-phone">Telefone</label>
+        <input
+          id="customer-phone"
+          type="tel"
+          formControlName="phone"
+          autocomplete="tel"
+          inputmode="numeric"
+          maxlength="14"
+          [attr.aria-invalid]="isFieldInvalid('phone')"
+          aria-describedby="customer-phone-error"
+          mask="(99)99999-9999"
+          (input)="formatPhoneInput($event)"
+        />
+        @if (isFieldInvalid('phone')) {
+          <p id="customer-phone-error" class="field-error">Informe um telefone para contato.</p>
+        }
+
+        <label for="customer-address">Local de entrega</label>
+        <textarea
+          id="customer-address"
+          formControlName="address"
+          rows="3"
+          autocomplete="street-address"
+          [attr.aria-invalid]="isFieldInvalid('address')"
+          aria-describedby="customer-address-error"
+        ></textarea>
+        @if (isFieldInvalid('address')) {
+          <p id="customer-address-error" class="field-error">Informe o endereço de entrega.</p>
+        }
+
+        <button class="modal-submit" type="submit">Enviar pedido</button>
+      </form>
+    </section>
+  </div>
+}
+

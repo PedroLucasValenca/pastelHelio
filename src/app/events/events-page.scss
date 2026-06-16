@@ -1,0 +1,262 @@
+:host {
+  display: block;
+  padding-top: 80px;
+  background: #080d0c;
+}
+
+.events-page {
+  padding: 72px 0 112px;
+}
+
+.events-hero,
+.contact-section {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 420px;
+  gap: 56px;
+  align-items: stretch;
+}
+
+.events-copy {
+  display: grid;
+  align-content: center;
+  min-height: 420px;
+}
+
+.events-copy > p,
+.section-heading p {
+  margin: 0 0 12px;
+  color: var(--ph-color-brand);
+  font-size: 0.78rem;
+  font-weight: 900;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.events-copy h1,
+.section-heading h2,
+.contact-intro h2 {
+  margin: 0;
+  line-height: 1;
+}
+
+.events-copy h1 {
+  max-width: 780px;
+  font-size: clamp(3rem, 7vw, 6.4rem);
+}
+
+.events-copy > span {
+  max-width: 700px;
+  margin-top: 24px;
+  color: var(--ph-color-muted);
+  font-size: 1.12rem;
+  line-height: 1.7;
+}
+
+.hero-actions,
+.contact-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 34px;
+}
+
+.primary-action,
+.secondary-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  min-height: 54px;
+  padding: 0 22px;
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.primary-action {
+  color: #071006;
+  background: var(--ph-color-brand);
+}
+
+.secondary-action {
+  color: var(--ph-color-brand);
+  border: 1px solid var(--ph-color-brand);
+}
+
+.primary-action svg,
+.secondary-action svg {
+  width: 20px;
+  height: 20px;
+}
+
+.order-rules,
+.suggestion-card,
+.contact-form {
+  background: var(--ph-color-surface);
+  border: 1px solid var(--ph-color-border-muted);
+  border-radius: 12px;
+}
+
+.order-rules {
+  display: grid;
+  align-content: center;
+  padding: 36px;
+}
+
+.order-rules > svg,
+.contact-intro > svg,
+.suggestion-card > svg {
+  width: 42px;
+  height: 42px;
+  color: var(--ph-color-brand);
+}
+
+.order-rules h2 {
+  margin: 28px 0 18px;
+  font-size: 1.8rem;
+}
+
+.order-rules ul {
+  display: grid;
+  gap: 14px;
+  padding: 0;
+  margin: 0;
+  color: var(--ph-color-muted);
+  list-style: none;
+  line-height: 1.5;
+}
+
+.order-rules li::before {
+  margin-right: 10px;
+  color: var(--ph-color-brand);
+  content: "•";
+}
+
+.events-section {
+  margin-top: 96px;
+}
+
+.section-heading {
+  margin-bottom: 32px;
+}
+
+.section-heading h2,
+.contact-intro h2 {
+  font-size: clamp(2.2rem, 5vw, 4rem);
+}
+
+.suggestion-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.suggestion-card {
+  padding: 28px;
+}
+
+.suggestion-card h3 {
+  margin: 24px 0 12px;
+  font-size: 1.28rem;
+}
+
+.suggestion-card p,
+.contact-intro p {
+  margin: 0;
+  color: var(--ph-color-muted);
+  line-height: 1.6;
+}
+
+.contact-section {
+  margin-top: 96px;
+  align-items: start;
+}
+
+.contact-intro {
+  display: grid;
+  gap: 20px;
+  align-content: start;
+}
+
+.contact-intro p {
+  max-width: 560px;
+  font-size: 1.08rem;
+}
+
+.contact-form {
+  display: grid;
+  gap: 18px;
+  padding: 28px;
+}
+
+.contact-form label {
+  display: grid;
+  gap: 8px;
+  color: var(--ph-color-muted);
+  font-size: 0.86rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.contact-form input,
+.contact-form textarea {
+  width: 100%;
+  color: var(--ph-color-text);
+  background: #101514;
+  border: 1px solid var(--ph-color-border-muted);
+  border-radius: 8px;
+}
+
+.contact-form input {
+  min-height: 50px;
+  padding: 0 14px;
+}
+
+.contact-form textarea {
+  min-height: 136px;
+  padding: 14px;
+  resize: vertical;
+}
+
+.contact-form input:focus,
+.contact-form textarea:focus {
+  border-color: var(--ph-color-brand);
+  outline: 0;
+}
+
+.contact-actions {
+  margin-top: 6px;
+}
+
+@media (max-width: 1040px) {
+  .events-hero,
+  .contact-section {
+    grid-template-columns: 1fr;
+  }
+
+  .suggestion-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding-top: 72px;
+  }
+
+  .events-page {
+    padding: 48px 0 80px;
+  }
+
+  .events-copy {
+    min-height: auto;
+  }
+
+  .suggestion-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .primary-action,
+  .secondary-action {
+    width: 100%;
+  }
+}

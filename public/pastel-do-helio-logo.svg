@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 240" role="img" aria-labelledby="title">
+  <title id="title">Pastel do Helio</title>
+  <rect width="320" height="240" fill="#211f1f"/>
+  <path d="M10 74 160 28l150 46v92l-150 46L10 166Z" fill="none" stroke="#fff" stroke-width="16" stroke-linejoin="round"/>
+  <path d="M39 150h242" stroke="#fff" stroke-width="10"/>
+  <path d="M88 165h144l-72 25Z" fill="none" stroke="#fff" stroke-width="5" stroke-linejoin="round"/>
+  <text x="160" y="101" fill="#fff" font-family="Georgia, 'Times New Roman', serif" font-size="48" font-weight="700" text-anchor="middle">Pastel do</text>
+  <text x="160" y="153" fill="#fff" font-family="Georgia, 'Times New Roman', serif" font-size="76" font-weight="900" text-anchor="middle">Helio</text>
+  <text x="160" y="179" fill="#211f1f" font-family="Arial, sans-serif" font-size="13" font-weight="700" text-anchor="middle">DESDE 1990</text>
+</svg>

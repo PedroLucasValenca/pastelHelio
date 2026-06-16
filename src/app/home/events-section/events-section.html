@@ -1,0 +1,43 @@
+<section class="events ph-shell" id="eventos" aria-labelledby="events-title">
+  <div class="section-heading">
+    <h2 id="events-title">Próximos eventos</h2>
+    <p>Alma de rua brasileira</p>
+  </div>
+
+  <div class="event-grid">
+    <article class="featured-event">
+      <img
+        ngSrc="/pastel-hero.png"
+        alt="Pastel crocante servido com molho e limão em uma bancada de feira"
+        fill
+        class="event-image"
+      />
+      <div class="event-shade"></div>
+      <div class="event-copy">
+        <span class="event-date">{{ featuredMarket().label }}</span>
+        <h3>{{ featuredMarket().location.title }}</h3>
+        <p>
+          {{ featuredMarket().location.day }}, das {{ getTimeRange() }}, em
+          {{ featuredMarket().location.address }}, {{ featuredMarket().location.neighborhood }}.
+        </p>
+        <a routerLink="/locais">Ver agenda completa</a>
+      </div>
+    </article>
+
+    <article class="news-card">
+      <svg lucideUtensilsCrossed aria-hidden="true"></svg>
+      <h3>Novo cardápio</h3>
+      <p>Confira os sabores disponíveis e escolha seus pastéis para pedir no delivery.</p>
+      <a routerLink="/cardapio">Saiba mais <span aria-hidden="true">-></span></a>
+    </article>
+
+    @if (isDeliveryVisible()) {
+      <article class="delivery-card">
+        <svg lucideBike aria-hidden="true"></svg>
+        <h3>Delivery aberto</h3>
+        <p>Hoje das {{ deliveryTimeLabel() }}. Peça seus pastéis sem sair de casa.</p>
+        <a routerLink="/cardapio">Pedir agora <span aria-hidden="true">-></span></a>
+      </article>
+    }
+  </div>
+</section>

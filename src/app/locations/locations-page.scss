@@ -1,0 +1,277 @@
+:host {
+  display: block;
+  min-height: calc(100dvh - 80px);
+  padding-top: 80px;
+  background: #080d0c;
+}
+
+.locations-page {
+  display: grid;
+  grid-template-columns: minmax(320px, 420px) minmax(0, 1fr);
+  min-height: calc(100dvh - 80px);
+  border-top: 1px solid rgba(255, 255, 255, 0.04);
+}
+
+.schedule-panel {
+  padding: 36px 36px 48px;
+  background: #191d1a;
+  border-right: 1px solid rgba(86, 255, 88, 0.1);
+}
+
+.schedule-panel header {
+  padding-bottom: 32px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.schedule-panel header p,
+.schedule-panel header span {
+  margin: 0;
+  color: var(--ph-color-brand);
+}
+
+.schedule-panel h1 {
+  margin: 8px 0;
+  font-size: clamp(2rem, 4vw, 3rem);
+  line-height: 1;
+}
+
+.schedule-list {
+  display: grid;
+  gap: 22px;
+  padding-top: 28px;
+}
+
+.schedule-card {
+  display: grid;
+  gap: 22px;
+  width: 100%;
+  color: inherit;
+  text-align: left;
+  padding: 22px;
+  background: #202320;
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  cursor: pointer;
+}
+
+.schedule-card.is-active,
+.schedule-card:focus-visible {
+  background: #303430;
+  border-color: var(--ph-color-brand);
+  box-shadow: 0 0 24px rgba(70, 255, 79, 0.14);
+  outline: 0;
+}
+
+.day-row,
+.card-main,
+.time-row {
+  display: flex;
+  align-items: center;
+}
+
+.day-row,
+.card-main {
+  justify-content: space-between;
+  gap: 16px;
+}
+
+.day-row h2 {
+  margin: 0;
+  color: var(--ph-color-soft);
+  font-size: 0.8rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+}
+
+.day-row span {
+  padding: 6px 10px;
+  color: #071006;
+  background: var(--ph-color-brand);
+  border-radius: 999px;
+  font-size: 0.7rem;
+  font-weight: 900;
+  text-transform: uppercase;
+}
+
+.card-main h3 {
+  margin: 0 0 8px;
+  font-size: 1.12rem;
+}
+
+.card-main p {
+  margin: 0;
+  color: var(--ph-color-muted);
+  font-size: 0.92rem;
+}
+
+.maps-link {
+  display: inline-flex;
+  margin-top: 10px;
+  color: var(--ph-color-brand);
+  font-size: 0.86rem;
+  font-weight: 900;
+}
+
+.card-main svg {
+  width: 26px;
+  height: 26px;
+  color: var(--ph-color-brand);
+  flex: 0 0 auto;
+}
+
+.time-row {
+  gap: 8px;
+  color: var(--ph-color-muted);
+  font-weight: 800;
+}
+
+.time-row svg {
+  width: 18px;
+  height: 18px;
+  color: var(--ph-color-brand);
+}
+
+.map-panel {
+  position: relative;
+  min-height: clamp(420px, 62dvh, 560px);
+  overflow: hidden;
+  background: #0b1110;
+}
+
+.map-fallback {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(1) invert(0.92) contrast(1.06) brightness(0.72) sepia(0.22) hue-rotate(65deg) saturate(1.8);
+  border: 0;
+}
+
+.leaflet-map {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  filter: grayscale(1) invert(0.92) contrast(1.06) brightness(0.72) sepia(0.22) hue-rotate(65deg) saturate(1.8);
+}
+
+.map-state {
+  position: absolute;
+  top: 18px;
+  left: 18px;
+  z-index: 2;
+  display: grid;
+  place-items: center;
+  gap: 12px;
+  max-width: min(320px, calc(100% - 36px));
+  padding: 12px 14px;
+  color: var(--ph-color-muted);
+  background: rgba(11, 17, 16, 0.92);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 8px;
+  font-weight: 900;
+  text-align: center;
+}
+
+.map-state a {
+  color: var(--ph-color-brand);
+}
+
+.delivery-card {
+  position: absolute;
+  z-index: 500;
+  right: 36px;
+  bottom: 36px;
+  display: grid;
+  grid-template-columns: auto 1fr;
+  gap: 18px;
+  width: min(360px, calc(100% - 72px));
+  padding: 28px;
+  background: rgba(25, 28, 26, 0.94);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 12px;
+}
+
+.delivery-card > svg {
+  width: 46px;
+  height: 46px;
+  padding: 10px;
+  color: #071006;
+  background: var(--ph-color-brand);
+  border-radius: 999px;
+}
+
+.delivery-card h2 {
+  margin: 0 0 12px;
+  font-size: 1.4rem;
+}
+
+.delivery-card p {
+  margin: 0 0 22px;
+  color: var(--ph-color-muted);
+  line-height: 1.5;
+}
+
+.delivery-card a {
+  display: inline-flex;
+  justify-content: center;
+  width: 100%;
+  padding: 16px 20px;
+  color: #071006;
+  background: var(--ph-color-brand);
+  border-radius: 8px;
+  font-weight: 900;
+}
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (max-width: 980px) {
+  .locations-page {
+    grid-template-columns: 1fr;
+  }
+
+  .schedule-panel {
+    border-right: 0;
+  }
+
+  .map-panel {
+    min-height: 480px;
+  }
+}
+
+@media (max-width: 640px) {
+  :host {
+    padding-top: 72px;
+  }
+
+  .locations-page {
+    min-height: calc(100dvh - 72px);
+  }
+
+  .schedule-panel {
+    padding: 28px 16px 36px;
+  }
+
+  .map-panel {
+    display: none;
+  }
+
+  .delivery-card {
+    right: 16px;
+    bottom: 16px;
+    grid-template-columns: 1fr;
+    width: calc(100% - 32px);
+  }
+}

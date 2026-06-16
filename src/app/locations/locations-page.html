@@ -1,0 +1,76 @@
+<section class="locations-page" aria-labelledby="locations-title">
+  <aside class="schedule-panel">
+    <header>
+      <p>{{ city }}, {{ state }}</p>
+      <h1 id="locations-title">Agenda das Feiras</h1>
+      <span>Encontre o Pastel do Hélio nas feiras tradicionais de Curitiba.</span>
+    </header>
+
+    <div class="schedule-list" aria-label="Agenda semanal">
+      @for (location of locations(); track location.id) {
+        <article
+          class="schedule-card"
+          role="button"
+          tabindex="0"
+          [class.is-active]="location.id === selectedLocation().id"
+          (click)="selectLocation(location)"
+          (keydown.enter)="selectLocation(location)"
+          (keydown.space)="selectLocation(location)"
+        >
+          <div class="day-row">
+            <h2>{{ location.day }}</h2>
+            @if (location.id === featuredMarket().location.id) {
+              <span>Próxima feira</span>
+            }
+          </div>
+
+          <div class="card-main">
+            <div>
+              <h3>{{ location.title }}</h3>
+              <p>{{ location.address }}, {{ location.neighborhood }}</p>
+              <a class="maps-link" [href]="getGoogleMapsUrl(location)" target="_blank" rel="noopener" (click)="$event.stopPropagation()">
+                Abrir no Google Maps
+              </a>
+            </div>
+            <svg lucideUtensils aria-hidden="true"></svg>
+          </div>
+
+          <div class="time-row">
+            <svg lucideClock aria-hidden="true"></svg>
+            <span>{{ getTimeRange(location) }}</span>
+          </div>
+        </article>
+      }
+    </div>
+  </aside>
+
+  <div class="map-panel" aria-label="Mapa dos pontos de feira em Curitiba">
+    <iframe
+      class="map-fallback"
+      title="Mapa do local selecionado"
+      [src]="mapEmbedUrl()"
+      loading="lazy"
+      referrerpolicy="no-referrer-when-downgrade"
+    ></iframe>
+    <div #mapContainer class="leaflet-map" role="img" aria-label="Mapa com pontos de feira em Curitiba"></div>
+    @if (!isMapReady() && !hasMapError()) {
+      <div class="map-state" role="status">Carregando mapa interativo...</div>
+    }
+    @if (hasMapError()) {
+      <div class="map-state">
+        <span>Não foi possível carregar o mapa.</span>
+        <a [href]="getGoogleMapsUrl(selectedLocation())" target="_blank" rel="noopener">Abrir no Google Maps</a>
+      </div>
+    }
+    @if (isDeliveryVisible()) {
+      <aside class="delivery-card" aria-labelledby="delivery-title">
+        <svg lucideBike aria-hidden="true"></svg>
+        <div>
+          <h2 id="delivery-title">Prefere delivery?</h2>
+          <p>Delivery hoje das {{ deliveryTimeLabel() }}. Levamos o crocante até a sua porta.</p>
+          <a routerLink="/cardapio">Pedir online agora</a>
+        </div>
+      </aside>
+    }
+  </div>
+</section>

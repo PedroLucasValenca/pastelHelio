@@ -1,12 +1,28 @@
-import { Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
+import { HomeFooterComponent } from './home/site-footer/site-footer';
+import { HomeHeaderComponent } from './home/site-header/site-header';
 
 @Component({
-  selector: 'app-root',
-  imports: [RouterOutlet],
-  templateUrl: './app.html',
-  styleUrl: './app.scss'
+  selector: 'ph-root',
+  imports: [RouterOutlet, HomeFooterComponent, HomeHeaderComponent],
+  template: `
+    <ph-home-header />
+
+    <main>
+      <router-outlet />
+    </main>
+
+    <ph-home-footer />
+  `,
+  styles: `
+    :host {
+      display: block;
+      min-height: 100dvh;
+      color: var(--ph-color-text);
+      background: var(--ph-color-bg);
+    }
+  `,
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class App {
-  protected readonly title = signal('pastelHelio2026');
-}
+export class AppComponent {}

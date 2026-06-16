@@ -1,0 +1,84 @@
+<main class="events-page" aria-labelledby="events-title">
+  <section class="events-hero ph-shell">
+    <div class="events-copy">
+      <p>Eventos e encomendas</p>
+      <h1 id="events-title">Pastel do Hélio para servir sua turma.</h1>
+      <span>
+        Encomendas acima de 20 pastéis, sempre com pelo menos 1 dia de antecedência. Também atendemos eventos no local.
+      </span>
+      <div class="hero-actions" aria-label="Ações de contato">
+        <a class="primary-action" [href]="whatsappUrl()" target="_blank" rel="noopener">
+          <svg lucideMessageCircle aria-hidden="true"></svg>
+          Chamar no WhatsApp
+        </a>
+        <a class="secondary-action" [href]="emailUrl()">
+          <svg lucideMail aria-hidden="true"></svg>
+          Enviar e-mail
+        </a>
+      </div>
+    </div>
+
+    <aside class="order-rules" aria-labelledby="rules-title">
+      <svg lucideCalendarDays aria-hidden="true"></svg>
+      <h2 id="rules-title">Como funciona</h2>
+      <ul>
+        <li>Pedido mínimo de 20 pastéis.</li>
+        <li>Solicite com pelo menos 1 dia de antecedência.</li>
+        <li>Atendemos encomendas e eventos no seu local.</li>
+      </ul>
+    </aside>
+  </section>
+
+  <section class="events-section ph-shell" aria-labelledby="suggestions-title">
+    <div class="section-heading">
+      <p>Ocasiões</p>
+      <h2 id="suggestions-title">Onde o pastel entra bonito</h2>
+    </div>
+
+    <div class="suggestion-grid">
+      @for (suggestion of eventSuggestions; track suggestion.title) {
+        <article class="suggestion-card">
+          <svg lucidePartyPopper aria-hidden="true"></svg>
+          <h3>{{ suggestion.title }}</h3>
+          <p>{{ suggestion.description }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="contact-section ph-shell" aria-labelledby="contact-title">
+    <div class="contact-intro">
+      <svg lucideUsers aria-hidden="true"></svg>
+      <h2 id="contact-title">Conte o que você precisa</h2>
+      <p>Digite seu contato e o tipo de evento. A mensagem já sai pronta para WhatsApp ou e-mail.</p>
+    </div>
+
+    <div class="contact-form" aria-label="Dados para contato">
+      <label>
+        Nome
+        <input type="text" autocomplete="name" placeholder="Seu nome" (input)="updateContactName($event)" />
+      </label>
+
+      <label>
+        WhatsApp ou e-mail
+        <input type="text" autocomplete="email" placeholder="Como podemos falar com você?" (input)="updateContactInfo($event)" />
+      </label>
+
+      <label>
+        O que deseja?
+        <textarea rows="5" placeholder="Ex.: 80 pastéis para festa junina no sábado..." (input)="updateRequestDetails($event)"></textarea>
+      </label>
+
+      <div class="contact-actions">
+        <a class="primary-action" [href]="whatsappUrl()" target="_blank" rel="noopener">
+          <svg lucideMessageCircle aria-hidden="true"></svg>
+          Enviar no WhatsApp
+        </a>
+        <a class="secondary-action" [href]="emailUrl()">
+          <svg lucideMail aria-hidden="true"></svg>
+          Enviar por e-mail
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

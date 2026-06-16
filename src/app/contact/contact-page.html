@@ -1,0 +1,86 @@
+<main class="contact-page" aria-labelledby="contact-title">
+  <section class="contact-hero ph-shell">
+    <div class="contact-copy">
+      <p>Fale conosco</p>
+      <h1 id="contact-title">A gente responde por WhatsApp, e-mail ou Instagram.</h1>
+      <span>
+        Mande sua dúvida, pedido, sugestão ou convite para evento. Se preferir acompanhar as novidades, chama a gente no Instagram.
+      </span>
+
+      <div class="hero-actions" aria-label="Canais de contato">
+        <a class="primary-action" [href]="whatsappUrl()" target="_blank" rel="noopener">
+          <svg lucideMessageCircle aria-hidden="true"></svg>
+          Chamar no WhatsApp
+        </a>
+        <a class="secondary-action" [href]="instagramUrl" target="_blank" rel="noopener" aria-label="Abrir Instagram do Pastel do Hélio">
+          <svg lucideAtSign aria-hidden="true"></svg>
+          Instagram
+        </a>
+      </div>
+    </div>
+
+    <aside class="contact-card" aria-labelledby="direct-title">
+      <svg lucidePhone aria-hidden="true"></svg>
+      <h2 id="direct-title">Contato direto</h2>
+      <p>Use o formulário para deixar a mensagem pronta ou fale direto pelos canais abaixo.</p>
+      <div class="direct-links">
+        <a [href]="whatsappUrl()" target="_blank" rel="noopener">WhatsApp</a>
+        <a [href]="emailUrl()">contato@pasteldohelio.com.br</a>
+        <a [href]="instagramUrl" target="_blank" rel="noopener">&#64;pasteldohelio</a>
+      </div>
+    </aside>
+  </section>
+
+  <section class="contact-options ph-shell" aria-labelledby="options-title">
+    <div class="section-heading">
+      <p>Como podemos ajudar</p>
+      <h2 id="options-title">Escolha o melhor caminho</h2>
+    </div>
+
+    <div class="option-grid">
+      @for (option of contactOptions; track option.title) {
+        <article class="option-card">
+          <svg lucideMapPin aria-hidden="true"></svg>
+          <h3>{{ option.title }}</h3>
+          <p>{{ option.description }}</p>
+        </article>
+      }
+    </div>
+  </section>
+
+  <section class="message-section ph-shell" aria-labelledby="message-title">
+    <div class="message-intro">
+      <svg lucideMail aria-hidden="true"></svg>
+      <h2 id="message-title">Escreva sua mensagem</h2>
+      <p>Preencha os campos e escolha se quer enviar por WhatsApp ou por e-mail.</p>
+    </div>
+
+    <div class="contact-form" aria-label="Dados da mensagem">
+      <label>
+        Nome
+        <input type="text" autocomplete="name" placeholder="Seu nome" (input)="updateContactName($event)" />
+      </label>
+
+      <label>
+        WhatsApp ou e-mail
+        <input type="text" autocomplete="email" placeholder="Como podemos falar com você?" (input)="updateContactInfo($event)" />
+      </label>
+
+      <label>
+        Mensagem
+        <textarea rows="5" placeholder="Escreva sua dúvida, pedido ou sugestão..." (input)="updateMessage($event)"></textarea>
+      </label>
+
+      <div class="contact-actions">
+        <a class="primary-action" [href]="whatsappUrl()" target="_blank" rel="noopener">
+          <svg lucideMessageCircle aria-hidden="true"></svg>
+          Enviar no WhatsApp
+        </a>
+        <a class="secondary-action" [href]="emailUrl()">
+          <svg lucideMail aria-hidden="true"></svg>
+          Enviar por e-mail
+        </a>
+      </div>
+    </div>
+  </section>
+</main>

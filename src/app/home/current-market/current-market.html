@@ -1,0 +1,21 @@
+<section class="current-market ph-shell" aria-labelledby="current-market-title">
+  <div>
+    <span>{{ featuredMarket().label }}</span>
+    <h2 id="current-market-title">{{ featuredMarket().location.title }}</h2>
+    <p>
+      {{ featuredMarket().location.address }},
+      {{ featuredMarket().location.neighborhood }} -
+      {{ featuredMarket().location.city }},
+      {{ featuredMarket().location.state }}
+    </p>
+  </div>
+
+  <dl>
+    <div>
+      <dt><svg lucideClock aria-hidden="true"></svg>Horário</dt>
+      <dd>{{ featuredMarket().location.day }} · {{ timeRange() }}</dd>
+    </div>
+  </dl>
+
+  <a routerLink="/locais">Ver agenda completa</a>
+</section>
